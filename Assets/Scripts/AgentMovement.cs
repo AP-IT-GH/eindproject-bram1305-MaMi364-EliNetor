@@ -11,7 +11,7 @@ public class CubeAgentRays : Agent
     public float minJumpForce = 5f; // Minimum jump force
     public float maxJumpForce = 10f; // Maximum jump force
     public float chargeRate = 2f; // Rate at which jump force charges
-    public Transform platform;
+
     private Vector3 startingPosition;
     private Rigidbody rb;
     private bool isChargingJump = false; // Flag to track if jump is being charged
@@ -35,9 +35,22 @@ public class CubeAgentRays : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        float distance = Vector3.Distance(transform.position, platform.position);
-        sensor.AddObservation(distance);
+        float minDistance = Mathf.Infinity;
+        float distanceToEndPlatform = Mathf.Infinity;
+        GameObject endPlatform = GameObject.FindGameObjectWithTag("Einde");
+
+        // Iterate through all platforms to find the nearest one
+        foreach (GameObject plat in GameObject.FindGameObjectsWithTag("Platform"))
+        {
+            float distance = Vector3.Distance(transform.position, plat.transform.position);
+            minDistance = Mathf.Min(minDistance, distance);
+        }
+
+        distanceToEndPlatform = Vector3.Distance(transform.position, endPlatform.transform.position);
+
+        sensor.AddObservation(minDistance);
         sensor.AddObservation(currentJumpForce);
+        sensor.AddObservation(distanceToEndPlatform);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -77,7 +90,8 @@ public class CubeAgentRays : Agent
         }
         else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
         {
-            AddReward(1f);
+            Debug.Log("FINISHED!");
+            AddReward(2f);
             EndEpisode();
         }
     }
@@ -111,6 +125,7 @@ public class CubeAgentRays : Agent
     {
         if (IsGrounded())
         {
+            AddReward(0.1f);
             forwardForce = currentJumpForce / 2;
 
             Vector3 forwardJumpDirection = transform.forward * forwardForce;
@@ -126,7 +141,7 @@ public class CubeAgentRays : Agent
     bool IsGrounded()
     {
         RaycastHit hit;
-        float raycastDistance = 1f;
+        float raycastDistance = 0.8f;
         return Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance);
     }
 
