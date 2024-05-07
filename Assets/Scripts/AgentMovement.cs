@@ -56,7 +56,13 @@ public class CubeAgentRays : Agent
         else if (isChargingJump)
         {
             EndChargingJump();
-        }      
+        }   
+        
+        if (this.transform.localPosition.y < 0f)
+        {
+            AddReward(-1f);
+            EndEpisode();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -65,7 +71,6 @@ public class CubeAgentRays : Agent
         {
             AddReward(1f);
             points = false;
-            Debug.Log(points);
         }
     }
     private void OnCollisionExit(Collision collision)
