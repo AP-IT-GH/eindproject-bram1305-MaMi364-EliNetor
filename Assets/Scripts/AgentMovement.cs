@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using System;
 
 public class CubeAgentRays : Agent
 {
@@ -70,6 +71,7 @@ public class CubeAgentRays : Agent
     {
         if(IsGrounded() && collision.gameObject.CompareTag("Platform") && points)
         {
+            Debug.Log("GOT POINTS");
             AddReward(1f);
             points = false;
         }
