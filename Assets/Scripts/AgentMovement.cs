@@ -36,6 +36,7 @@ public class CubeAgentRays : Agent
     {
         float distance = Vector3.Distance(transform.position, platform.position);
         sensor.AddObservation(distance);
+        sensor.AddObservation(currentJumpForce);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
