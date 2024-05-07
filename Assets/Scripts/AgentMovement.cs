@@ -16,6 +16,7 @@ public class CubeAgentRays : Agent
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
+    private bool points = true;
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +24,7 @@ public class CubeAgentRays : Agent
     }
     public override void OnEpisodeBegin()
     {
+        points = true;
         transform.position = startingPosition;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -54,6 +56,23 @@ public class CubeAgentRays : Agent
         else if (isChargingJump)
         {
             EndChargingJump();
+        }      
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(IsGrounded() && collision.gameObject.CompareTag("Platform") && points)
+        {
+            AddReward(1f);
+            points = false;
+            Debug.Log(points);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            points = true;
         }
     }
 
