@@ -11,13 +11,17 @@ public class CubeAgentRays : Agent
     public float minJumpForce = 5f; // Minimum jump force
     public float maxJumpForce = 10f; // Maximum jump force
     public float chargeRate = 2f; // Rate at which jump force charges
-
+    public LayerMask platformLayer;
     private Vector3 startingPosition;
     private Rigidbody rb;
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
     private bool points = true;
+    
+    
+
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,28 +33,33 @@ public class CubeAgentRays : Agent
         transform.position = startingPosition;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        currentJumpForce = 0f; // Reset charge level at the beginning of each episode
+        currentJumpForce = 0f; 
     }
 
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        float minDistance = Mathf.Infinity;
-        float distanceToEndPlatform = Mathf.Infinity;
-        GameObject endPlatform = GameObject.FindGameObjectWithTag("Einde");
 
-        // Iterate through all platforms to find the nearest one
-        foreach (GameObject plat in GameObject.FindGameObjectsWithTag("Platform"))
+        GameObject[] jumpPoints = GameObject.FindGameObjectsWithTag("JumpPoints");
+
+        // Find the nearest jump point
+        float nearestDistance = Mathf.Infinity;
+        foreach (GameObject jumpPoint in jumpPoints)
         {
-            float distance = Vector3.Distance(transform.position, plat.transform.position);
-            minDistance = Mathf.Min(minDistance, distance);
+            float distance = Vector3.Distance(transform.position, jumpPoint.transform.position);
+            if (distance > 2f)
+            {
+                nearestDistance = Mathf.Min(nearestDistance, distance); ;
+                Debug.Log(nearestDistance + " Distance F");
+            }
         }
 
-        distanceToEndPlatform = Vector3.Distance(transform.position, endPlatform.transform.position);
-
-        sensor.AddObservation(minDistance);
+        // Add the distance to the nearest jump point as an observation
+        sensor.AddObservation(nearestDistance);
         sensor.AddObservation(currentJumpForce);
-        sensor.AddObservation(distanceToEndPlatform);
+        sensor.AddObservation(forwardForce);
+        sensor.AddObservation(maxJumpForce);
+
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -71,13 +80,14 @@ public class CubeAgentRays : Agent
         else if (isChargingJump)
         {
             EndChargingJump();
-        }   
+        }
         
         if (this.transform.localPosition.y < 0f)
         {
             AddReward(-1f);
             EndEpisode();
         }
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -91,7 +101,7 @@ public class CubeAgentRays : Agent
         else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
         {
             Debug.Log("FINISHED!");
-            AddReward(2f);
+            AddReward(5f);
             EndEpisode();
         }
     }
@@ -123,9 +133,10 @@ public class CubeAgentRays : Agent
 
     private void Jump()
     {
+        
         if (IsGrounded())
         {
-            AddReward(0.1f);
+            AddReward(0.2f);
             forwardForce = currentJumpForce / 2;
 
             Vector3 forwardJumpDirection = transform.forward * forwardForce;
@@ -144,6 +155,8 @@ public class CubeAgentRays : Agent
         float raycastDistance = 0.8f;
         return Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance);
     }
+
+
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {

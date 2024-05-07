@@ -2,8 +2,8 @@ behaviors:
   Racer:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 10
-      buffer_size: 100
+      batch_size: 1024
+      buffer_size: 4096
       learning_rate: 3.0e-4
       beta: 5.0e-4
       epsilon: 0.2
@@ -22,4 +22,4 @@ behaviors:
         strength: 1.0
     max_steps: 500000
     time_horizon: 64
-    summary_freq: 10000
+    summary_freq: 2000
