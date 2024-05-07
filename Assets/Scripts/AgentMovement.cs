@@ -73,6 +73,11 @@ public class CubeAgentRays : Agent
             AddReward(1f);
             points = false;
         }
+        else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
+        {
+            AddReward(1f);
+            EndEpisode();
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
