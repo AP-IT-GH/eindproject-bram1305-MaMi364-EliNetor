@@ -8,6 +8,7 @@ using System;
 
 public class CubeAgentRays : Agent
 {
+    public Animator anim;  // Animation controller
     public float minJumpForce = 5f; // Minimum jump force
     public float maxJumpForce = 10f; // Maximum jump force
     public float chargeRate = 2f; // Rate at which jump force charges
@@ -19,13 +20,10 @@ public class CubeAgentRays : Agent
     private float forwardForce;
     private bool points = true;
     
-    
-
-
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        startingPosition = transform.position;
+        startingPosition = transform.position; // Begin positie als variabele nemen om later te resetten
     }
     public override void OnEpisodeBegin()
     {
@@ -36,10 +34,8 @@ public class CubeAgentRays : Agent
         currentJumpForce = 0f; 
     }
 
-
     public override void CollectObservations(VectorSensor sensor)
     {
-
         GameObject[] jumpPoints = GameObject.FindGameObjectsWithTag("JumpPoints");
 
         // Find the nearest jump point
@@ -50,12 +46,12 @@ public class CubeAgentRays : Agent
             if (distance > 2f)
             {
                 nearestDistance = Mathf.Min(nearestDistance, distance); ;
-                Debug.Log(nearestDistance + " Distance F");
             }
         }
 
         // Add the distance to the nearest jump point as an observation
         sensor.AddObservation(nearestDistance);
+        Debug.Log(nearestDistance + " Distance");
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
         sensor.AddObservation(maxJumpForce);
@@ -66,6 +62,10 @@ public class CubeAgentRays : Agent
     {
         float jumpAction = actions.ContinuousActions[0];
 
+        if (IsGrounded())
+        {
+            anim.SetBool("jump", false);
+        }
         if (jumpAction > 0f)
         {
             if (!isChargingJump)
@@ -87,7 +87,6 @@ public class CubeAgentRays : Agent
             AddReward(-1f);
             EndEpisode();
         }
-
     }
 
     private void OnCollisionStay(Collision collision)
@@ -117,6 +116,7 @@ public class CubeAgentRays : Agent
     {
         isChargingJump = true;
         currentJumpForce = minJumpForce;
+        anim.SetBool("crouch", true);
     }
 
     private void ContinueChargingJump()
@@ -127,6 +127,8 @@ public class CubeAgentRays : Agent
 
     private void EndChargingJump()
     {
+        anim.SetBool("crouch", false);
+        anim.SetBool("jump", true);
         isChargingJump = false;
         Jump();
     }
@@ -138,25 +140,19 @@ public class CubeAgentRays : Agent
         {
             AddReward(0.2f);
             forwardForce = currentJumpForce / 2;
-
+            Vector3 upwardForce = Vector3.up * currentJumpForce;
             Vector3 forwardJumpDirection = transform.forward * forwardForce;
 
-            // Add an upward force to the rigidbody to simulate jumping
-            rb.AddForce(Vector3.up * currentJumpForce, ForceMode.Impulse);
-
-            // Add a forward force to the rigidbody for the forward jump
-            rb.AddForce(forwardJumpDirection, ForceMode.Impulse);
+            rb.AddForce(upwardForce + forwardJumpDirection, ForceMode.Impulse);
         }
     }
 
     bool IsGrounded()
     {
         RaycastHit hit;
-        float raycastDistance = 0.8f;
+        float raycastDistance = 1.2f;
         return Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance);
     }
-
-
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
