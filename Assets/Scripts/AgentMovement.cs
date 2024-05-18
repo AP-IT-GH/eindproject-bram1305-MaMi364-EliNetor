@@ -15,6 +15,7 @@ public class CubeAgentRays : Agent
     public LayerMask platformLayer;
     private Vector3 startingPosition;
     private Rigidbody rb;
+    public CapsuleCollider capsuleCollider;
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
@@ -31,7 +32,8 @@ public class CubeAgentRays : Agent
         transform.position = startingPosition;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        currentJumpForce = 0f; 
+        currentJumpForce = 0f;
+        anim.SetBool("jump", false);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -135,7 +137,6 @@ public class CubeAgentRays : Agent
 
     private void Jump()
     {
-        
         if (IsGrounded())
         {
             AddReward(0.2f);
@@ -149,9 +150,16 @@ public class CubeAgentRays : Agent
 
     bool IsGrounded()
     {
-        RaycastHit hit;
-        float raycastDistance = 1.2f;
-        return Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance);
+        if (Physics.CheckSphere(transform.position + Vector3.down, 0.22f, platformLayer)) {
+            // changing the collider center Y position to adjust to the actual animations
+            Vector3 newCenter = new Vector3(capsuleCollider.center.x, -0.35f, capsuleCollider.center.z);
+            capsuleCollider.center = newCenter;
+            return true;
+        } else {
+            Vector3 newCenter = new Vector3(capsuleCollider.center.x, 0.4f, capsuleCollider.center.z);
+            capsuleCollider.center = newCenter;
+            return false;
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
