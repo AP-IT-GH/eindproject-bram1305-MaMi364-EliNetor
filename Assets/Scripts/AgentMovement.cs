@@ -99,6 +99,13 @@ public class CubeAgentRays : Agent
             AddReward(1f);
             points = false;
         }
+        else if(IsGrounded() && collision.gameObject.CompareTag("Checkpoint") && points)
+        {
+            Debug.Log("GOT POINTS");
+            AddReward(1f);
+            startingPosition = transform.position;
+            points = false;
+        }
         else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
         {
             Debug.Log("FINISHED!");
