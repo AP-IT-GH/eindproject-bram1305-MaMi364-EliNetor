@@ -14,6 +14,7 @@ public class CubeAgentRays : Agent
     public float chargeRate = 2f; // Rate at which jump force charges
     public LayerMask platformLayer;
     private Vector3 startingPosition;
+    private Vector3 beginPos;
     private Rigidbody rb;
     public CapsuleCollider capsuleCollider;
     private bool isChargingJump = false; // Flag to track if jump is being charged
@@ -25,6 +26,7 @@ public class CubeAgentRays : Agent
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position; // Begin positie als variabele nemen om later te resetten
+        beginPos = transform.position;
     }
     public override void OnEpisodeBegin()
     {
@@ -145,6 +147,7 @@ public class CubeAgentRays : Agent
         {
             Debug.Log("FINISHED!");
             AddReward(5f);
+            startingPosition = beginPos;
             EndEpisode();
         }
     }
