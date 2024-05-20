@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - Einde
   - JumpPoints
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
