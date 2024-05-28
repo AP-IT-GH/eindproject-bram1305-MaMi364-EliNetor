@@ -4,7 +4,7 @@ using System.Collections;
 public class RotatePlatform : MonoBehaviour
 {
     public float rotationSpeed = 360f; // Degrees per second
-    public float pauseTime = 3f; // Pause duration in seconds
+    public float pauseTime = 6f; // Pause duration in seconds
     private bool isRotating = false;
 
     void Start()
