@@ -65,7 +65,6 @@ public class AgentMovement: Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         float jumpAction = actions.ContinuousActions[0];
-        float rotateAction = actions.ContinuousActions[1];
 
         if (IsGrounded())
         {
