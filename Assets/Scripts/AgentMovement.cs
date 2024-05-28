@@ -41,24 +41,42 @@ public class AgentMovement: Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         GameObject[] jumpPoints = GameObject.FindGameObjectsWithTag("JumpPoints");
+        GameObject[] movingPlatforms = GameObject.FindGameObjectsWithTag("MovingPlatform");
 
         // Find the nearest jump point
-        float nearestDistance = Mathf.Infinity;
+        float nearestJumpPointDistance = Mathf.Infinity;
         foreach (GameObject jumpPoint in jumpPoints)
         {
             float distance = Vector3.Distance(transform.position, jumpPoint.transform.position);
             if (distance > 2f)
             {
-                nearestDistance = Mathf.Min(nearestDistance, distance); ;
+                nearestJumpPointDistance = Mathf.Min(nearestJumpPointDistance, distance);
             }
         }
 
-        // Add the distance to the nearest jump point as an observation
-        sensor.AddObservation(nearestDistance);
-        Debug.Log(nearestDistance + " Distance");
+        // Find the nearest moving platform
+        float nearestPlatformDistance = Mathf.Infinity;
+        float nearestPlatformXPosition = 0f; // Default value in case no platform is found
+        foreach (GameObject platform in movingPlatforms)
+        {
+            float distance = Vector3.Distance(transform.position, platform.transform.position);
+            if (distance < nearestPlatformDistance)
+            {
+                nearestPlatformDistance = distance;
+                nearestPlatformXPosition = platform.transform.position.x;
+            }
+        }
+
+        // Add observations
+        sensor.AddObservation(nearestJumpPointDistance);
+        Debug.Log(nearestJumpPointDistance + " Distance to nearest jump point");
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
         sensor.AddObservation(maxJumpForce);
+
+        // Add the x position of the nearest moving platform as an observation
+        sensor.AddObservation(nearestPlatformXPosition);
+        Debug.Log(nearestPlatformXPosition + " X position of nearest moving platform");
 
     }
 
@@ -95,13 +113,13 @@ public class AgentMovement: Agent
 
     private void OnCollisionStay(Collision collision)
     {
-        if (IsGrounded() && collision.gameObject.CompareTag("Platform") && points)
+        if (IsGrounded() && collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MovingPlatform") && points)
         {
             Debug.Log("GOT POINTS");
             AddReward(1f);
             points = false;
         }
-        else if (IsGrounded() && collision.gameObject.CompareTag("Checkpoint") && points)
+        else if (IsGrounded() && collision.gameObject.CompareTag("Checkpoint")  && points)
         {
             Debug.Log("GOT POINTS Checkpoint");
             AddReward(1f);

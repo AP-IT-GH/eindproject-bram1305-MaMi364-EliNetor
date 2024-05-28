@@ -8,6 +8,7 @@ TagManager:
   - Einde
   - JumpPoints
   - Checkpoint
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
