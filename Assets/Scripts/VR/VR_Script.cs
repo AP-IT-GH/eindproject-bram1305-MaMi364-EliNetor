@@ -5,8 +5,10 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using System;
+using UnityEngine.XR.Interaction.Toolkit; // Required for controls
+using UnityEngine.InputSystem; // Required for controls
 
-public class AgentMovement: Agent
+public class CubeAgentRays : Agent
 {
     public Animator anim;  // Animation controller
     public float minJumpForce = 5f; // Minimum jump force
@@ -22,11 +24,16 @@ public class AgentMovement: Agent
     private float forwardForce;
     private bool points = true;
 
+    public ActionBasedController controller; // Reference to the Action-based XR Controller
+    public InputActionReference primaryReference; // Pick reference action in menu
+    public InputActionReference secondaryReference; // Pick reference action in menu
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position; // Begin positie als variabele nemen om later te resetten
         beginPos = transform.position;
+
     }
     public override void OnEpisodeBegin()
     {
@@ -219,15 +226,20 @@ public class AgentMovement: Agent
         actions[1] = 0f;
 
         // Jump control
-        if (Input.GetKey(KeyCode.Space))
+        float isPrimaryPressed = primaryReference.action.ReadValue<float>(); //reads value of primary reference
+        if (isPrimaryPressed >0 )
         {
             actions[0] = 1f;
+            Debug.Log("Pri:True");
         }
 
         // Rotate control
-        if (Input.GetKey(KeyCode.R))
+        float isSecondaryPressed = secondaryReference.action.ReadValue<float>(); //reads value of primary reference
+        if (isSecondaryPressed > 0)
         {
             actions[1] = 1f;
+            Debug.Log("Sec:True");
         }
+        
     }
 }

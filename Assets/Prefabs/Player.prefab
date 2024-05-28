@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4844294610509987536}
   - component: {fileID: 5674968435456422081}
   - component: {fileID: 1902522285947215762}
-  - component: {fileID: 2696282398604221402}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -141,20 +140,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   capsuleCollider: {fileID: 1494502046952954474}
---- !u!114 &2696282398604221402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727509457106805189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 10
-  TakeActionsBetweenDecisions: 1
+  controller: {fileID: 0}
+  primaryReference: {fileID: 0}
+  secondaryReference: {fileID: 0}
 --- !u!1001 &9120272194438140310
 PrefabInstance:
   m_ObjectHideFlags: 0
