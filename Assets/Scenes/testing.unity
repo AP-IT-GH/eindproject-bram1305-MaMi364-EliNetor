@@ -792,6 +792,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51444498725701166, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 873626024484622138, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
       propertyPath: m_Name
       value: PlayerXR_temp

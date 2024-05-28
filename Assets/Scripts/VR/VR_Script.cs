@@ -7,6 +7,7 @@ using Unity.MLAgents.Actuators;
 using System;
 using UnityEngine.XR.Interaction.Toolkit; // Required for controls
 using UnityEngine.InputSystem; // Required for controls
+using static UnityEngine.GraphicsBuffer;
 
 public class CubeAgentRays : Agent
 {
@@ -23,6 +24,7 @@ public class CubeAgentRays : Agent
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
     private bool points = true;
+    public Transform dir;
 
     public ActionBasedController controller; // Reference to the Action-based XR Controller
     public InputActionReference primaryReference; // Pick reference action in menu
@@ -184,18 +186,24 @@ public class CubeAgentRays : Agent
         anim.SetBool("crouch", false);
         anim.SetBool("jump", true);
         isChargingJump = false;
-        Jump();
+        Jump(dir);
     }
 
-    private void Jump()
+    private void Jump(Transform target)
     {
         if (IsGrounded())
         {
             AddReward(0.2f);
-            forwardForce = currentJumpForce / 2;
-            Vector3 upwardForce = Vector3.up * currentJumpForce;
-            Vector3 forwardJumpDirection = transform.forward * forwardForce;
 
+            // Calculate jump direction towards the target
+            Vector3 jumpDirection = (target.position - transform.position).normalized;
+
+            // Calculate forward force based on jump direction
+            forwardForce = currentJumpForce / 2;
+            Vector3 forwardJumpDirection = target.forward * forwardForce;
+
+            // Apply upward force and forward jump direction
+            Vector3 upwardForce = Vector3.up * currentJumpForce;
             rb.AddForce(upwardForce + forwardJumpDirection, ForceMode.Impulse);
         }
     }
