@@ -338,6 +338,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 735586218}
+--- !u!4 &365541634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5579979647269576082, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
+  m_PrefabInstance: {fileID: 2424425953257172223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &543818804
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,16 +798,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 51444498725701166, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
+      propertyPath: dir
+      value: 
+      objectReference: {fileID: 365541634}
+    - target: {fileID: 51444498725701166, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
       propertyPath: MaxStep
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 51444498725701166, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
+      propertyPath: jump_dir
+      value: 
+      objectReference: {fileID: 365541634}
     - target: {fileID: 873626024484622138, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
       propertyPath: m_Name
       value: PlayerXR_temp
       objectReference: {fileID: 0}
     - target: {fileID: 991364963982185794, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 991364963982185794, guid: 20a795e2ab5be3643a051918dd82ed0d, type: 3}
       propertyPath: m_CollisionDetection

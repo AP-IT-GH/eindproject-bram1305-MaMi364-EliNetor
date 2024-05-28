@@ -118,7 +118,7 @@ public class AgentMovement: Agent
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Checkpoint"))
         {
             points = true;
         }
