@@ -92,41 +92,7 @@ public class AgentMovement: Agent
             AddReward(-1f);
             EndEpisode();
         }
-
-        if (rotateAction > 0f && !hasRotated && IsGrounded())
-        {
-            StartCoroutine(RotateCube());
-            hasRotated = true;
-        }
-        else if (rotateAction == 0f)
-        {
-            hasRotated = false;
-        }
     }
-
-    private bool hasRotated = false;
-
-    private IEnumerator RotateCube()
-    {
-        anim.SetBool("turn", true);
-
-        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("turn"))
-        {
-            yield return null;
-        }
-
-        while (anim.GetCurrentAnimatorStateInfo(0).IsName("turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
-            yield return null;
-        }
-
-        Vector3 newRotation = transform.eulerAngles;
-        newRotation.y += 180f;
-        transform.eulerAngles = newRotation;
-        anim.SetBool("turn", false);
-
-    }
-
 
     private void OnCollisionStay(Collision collision)
     {
@@ -138,7 +104,7 @@ public class AgentMovement: Agent
         }
         else if (IsGrounded() && collision.gameObject.CompareTag("Checkpoint") && points)
         {
-            Debug.Log("GOT POINTS");
+            Debug.Log("GOT POINTS Checkpoint");
             AddReward(1f);
             startingPosition = transform.position;
             points = false;
@@ -222,12 +188,6 @@ public class AgentMovement: Agent
         if (Input.GetKey(KeyCode.Space))
         {
             actions[0] = 1f;
-        }
-
-        // Rotate control
-        if (Input.GetKey(KeyCode.R))
-        {
-            actions[1] = 1f;
         }
     }
 }

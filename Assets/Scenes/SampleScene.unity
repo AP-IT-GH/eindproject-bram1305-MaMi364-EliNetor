@@ -773,6 +773,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: container_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2773935216860938237, guid: 9bcd638e9920de546bf1d699270a2a6e, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6718628539337084553, guid: 9bcd638e9920de546bf1d699270a2a6e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
