@@ -133,6 +133,10 @@ public class AgentMovement: Agent
             startingPosition = beginPos;
             EndEpisode();
         }
+        else if (collision.gameObject.CompareTag("Speler"))
+        {
+            EndEpisode();
+        }
     }
     private void OnCollisionExit(Collision collision)
     {

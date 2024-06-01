@@ -9,6 +9,7 @@ TagManager:
   - JumpPoints
   - Checkpoint
   - MovingPlatform
+  - Speler
   layers:
   - Default
   - TransparentFX
