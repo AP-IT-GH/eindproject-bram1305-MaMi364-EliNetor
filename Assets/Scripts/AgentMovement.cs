@@ -5,6 +5,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using System;
+using UnityEngine.UIElements;
 
 public class AgentMovement: Agent
 {
@@ -21,6 +22,11 @@ public class AgentMovement: Agent
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
     private bool points = true;
+    private float platformUnderAgentXPosition;
+    private float nearestPlatformXPosition;
+    private float nearestPlatformZRotation;
+    private float platformUnderAgentZRotation;
+    private float pauseTime = 7f;
 
     public override void Initialize()
     {
@@ -41,42 +47,82 @@ public class AgentMovement: Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         GameObject[] jumpPoints = GameObject.FindGameObjectsWithTag("JumpPoints");
-        GameObject[] movingPlatforms = GameObject.FindGameObjectsWithTag("MovingPlatform");
+        GameObject[] movingPlatforms = GameObject.FindGameObjectsWithTag("Platform");
 
         // Find the nearest jump point
         float nearestJumpPointDistance = Mathf.Infinity;
+        float zPosition = 0f;
         foreach (GameObject jumpPoint in jumpPoints)
         {
             float distance = Vector3.Distance(transform.position, jumpPoint.transform.position);
-            if (distance > 2f)
+            if (distance < nearestJumpPointDistance)
             {
-                nearestJumpPointDistance = Mathf.Min(nearestJumpPointDistance, distance);
+                if (distance > 2f)
+                {
+                    if (distance < nearestJumpPointDistance)
+                    {
+                        nearestJumpPointDistance = distance;
+                        zPosition = jumpPoint.transform.position.z;
+                    }
+                }
+            }
+        }
+
+        // Use Raycast to find the platform the agent is currently on
+        RaycastHit hit;
+        platformUnderAgentXPosition = 0f;
+        platformUnderAgentZRotation = 0f;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Platform"))
+            {
+                platformUnderAgentXPosition = hit.collider.transform.position.x;
+                platformUnderAgentZRotation = hit.collider.transform.rotation.eulerAngles.z;
             }
         }
 
         // Find the nearest moving platform
         float nearestPlatformDistance = Mathf.Infinity;
-        float nearestPlatformXPosition = 0f; // Default value in case no platform is found
+        nearestPlatformXPosition = 0f;
+        nearestPlatformZRotation = 0f;
         foreach (GameObject platform in movingPlatforms)
         {
             float distance = Vector3.Distance(transform.position, platform.transform.position);
             if (distance < nearestPlatformDistance)
             {
-                nearestPlatformDistance = distance;
-                nearestPlatformXPosition = platform.transform.position.x;
+                if (distance > 2f)
+                {
+                    nearestPlatformDistance = distance;
+                    nearestPlatformXPosition = platform.transform.position.x;
+                    nearestPlatformZRotation = platform.transform.rotation.eulerAngles.z;
+                }
             }
         }
 
         // Add observations
         sensor.AddObservation(nearestJumpPointDistance);
-        Debug.Log(nearestJumpPointDistance + " Distance to nearest jump point");
+        sensor.AddObservation(zPosition);
+
+        //Debug.Log("DISTANCE: " + nearestJumpPointDistance);
+        //Debug.Log(nearestJumpPointDistance + " Distance to nearest jump point");
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
+        sensor.AddObservation(minJumpForce);
         sensor.AddObservation(maxJumpForce);
+
+        // Add the x position of the platform the agent is currently on as an observation
+        sensor.AddObservation(platformUnderAgentXPosition);
+        //Debug.Log(platformUnderAgentXPosition + " X position of platform under agent");
 
         // Add the x position of the nearest moving platform as an observation
         sensor.AddObservation(nearestPlatformXPosition);
-        Debug.Log(nearestPlatformXPosition + " X position of nearest moving platform");
+        //Debug.Log(nearestPlatformXPosition + " X position of nearest moving platform");
+
+
+        // Add the Z rotation of the nearest moving platform as an observation
+        sensor.AddObservation(nearestPlatformZRotation);
+        sensor.AddObservation(pauseTime);
+
 
     }
 
@@ -106,36 +152,40 @@ public class AgentMovement: Agent
 
         if (this.transform.localPosition.y < 0f)
         {
-            AddReward(-1f);
+            AddReward(-2f);
             EndEpisode();
         }
+
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (IsGrounded() && collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MovingPlatform") && points)
+        if (IsGrounded() && points)
         {
-            Debug.Log("GOT POINTS");
-            AddReward(1f);
-            points = false;
-        }
-        else if (IsGrounded() && collision.gameObject.CompareTag("Checkpoint")  && points)
-        {
-            Debug.Log("GOT POINTS Checkpoint");
-            AddReward(1f);
-            startingPosition = transform.position;
-            points = false;
-        }
-        else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
-        {
-            Debug.Log("FINISHED!");
-            AddReward(5f);
-            startingPosition = beginPos;
-            EndEpisode();
-        }
-        else if (collision.gameObject.CompareTag("Speler"))
-        {
-            EndEpisode();
+            if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MovingPlatform"))
+            {
+                Debug.Log("GOT POINTS");
+                AddReward(1f);
+                points = false;
+            }
+            else if (collision.gameObject.CompareTag("Checkpoint"))
+            {
+                Debug.Log("GOT POINTS Checkpoint");
+                AddReward(1f);
+                startingPosition = transform.position;
+                points = false;
+            }
+            else if (collision.gameObject.CompareTag("Einde"))
+            {
+                Debug.Log("FINISHED!");
+                AddReward(5f);
+                startingPosition = beginPos;
+                EndEpisode();
+            }
+            else if (collision.gameObject.CompareTag("Speler"))
+            {
+                EndEpisode();
+            }
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -151,12 +201,17 @@ public class AgentMovement: Agent
         isChargingJump = true;
         currentJumpForce = minJumpForce;
         anim.SetBool("crouch", true);
+        AddReward(0.1f);
     }
 
     private void ContinueChargingJump()
     {
         // Increase jump force as long as the jump button is held
         currentJumpForce = Mathf.Min(currentJumpForce + Time.fixedDeltaTime * chargeRate, maxJumpForce);
+        if (currentJumpForce > maxJumpForce)
+        {
+            EndChargingJump();
+        }
     }
 
     private void EndChargingJump()
@@ -165,13 +220,13 @@ public class AgentMovement: Agent
         anim.SetBool("jump", true);
         isChargingJump = false;
         Jump();
+  
     }
 
     private void Jump()
     {
         if (IsGrounded())
         {
-            AddReward(0.2f);
             forwardForce = currentJumpForce / 2;
             Vector3 upwardForce = Vector3.up * currentJumpForce;
             Vector3 forwardJumpDirection = transform.forward * forwardForce;
@@ -203,7 +258,6 @@ public class AgentMovement: Agent
 
         // Reset continuous actions
         actions[0] = 0f;
-        actions[1] = 0f;
 
         // Jump control
         if (Input.GetKey(KeyCode.Space))
