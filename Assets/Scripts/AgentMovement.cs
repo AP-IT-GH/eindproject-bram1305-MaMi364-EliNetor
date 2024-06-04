@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 using System;
 using UnityEngine.UIElements;
 
-public class AgentMovement: Agent
+public class AgentMovement : Agent
 {
     public Animator anim;  // Animation controller
     public float minJumpForce = 5f; // Minimum jump force
@@ -27,6 +27,8 @@ public class AgentMovement: Agent
     private float nearestPlatformZRotation;
     private float platformUnderAgentZRotation;
     private float pauseTime = 7f;
+    private string checkpointName;
+    private string previousCheckpoint;
 
     public override void Initialize()
     {
@@ -170,8 +172,15 @@ public class AgentMovement: Agent
             }
             else if (collision.gameObject.CompareTag("Checkpoint"))
             {
-                Debug.Log("GOT POINTS Checkpoint");
-                AddReward(1f);
+                checkpointName = collision.gameObject.name;
+
+                if (checkpointName != previousCheckpoint)
+                {
+                    Debug.Log("GOT POINTS Checkpoint");
+                    AddReward(1f);
+                    previousCheckpoint = collision.gameObject.name;
+                }
+
                 startingPosition = transform.position;
                 points = false;
             }
@@ -220,7 +229,7 @@ public class AgentMovement: Agent
         anim.SetBool("jump", true);
         isChargingJump = false;
         Jump();
-  
+
     }
 
     private void Jump()
