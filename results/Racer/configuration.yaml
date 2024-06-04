@@ -4,7 +4,7 @@ behaviors:
     trainer_type: ppo
     hyperparameters:
       batch_size: 1024
-      buffer_size: 4096
+      buffer_size: 8192
       learning_rate: 0.0003
       beta: 0.0005
       epsilon: 0.2
@@ -66,7 +66,7 @@ checkpoint_settings:
   run_id: Racer
   initialize_from: null
   load_model: false
-  resume: true
+  resume: false
   force: false
   train_model: false
   inference: false

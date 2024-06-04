@@ -26,7 +26,6 @@ public class AgentMovement : Agent
     private float nearestPlatformXPosition;
     private float nearestPlatformZRotation;
     private float platformUnderAgentZRotation;
-    private float pauseTime = 7f;
     private string checkpointName;
     private string previousCheckpoint;
 
@@ -86,7 +85,6 @@ public class AgentMovement : Agent
         // Find the nearest moving platform
         float nearestPlatformDistance = Mathf.Infinity;
         nearestPlatformXPosition = 0f;
-        nearestPlatformZRotation = 0f;
         foreach (GameObject platform in movingPlatforms)
         {
             float distance = Vector3.Distance(transform.position, platform.transform.position);
@@ -96,20 +94,18 @@ public class AgentMovement : Agent
                 {
                     nearestPlatformDistance = distance;
                     nearestPlatformXPosition = platform.transform.position.x;
-                    nearestPlatformZRotation = platform.transform.rotation.eulerAngles.z;
                 }
             }
         }
 
         // Add observations
         sensor.AddObservation(nearestJumpPointDistance);
-        sensor.AddObservation(zPosition);
+        //sensor.AddObservation(zPosition);
 
         //Debug.Log("DISTANCE: " + nearestJumpPointDistance);
         //Debug.Log(nearestJumpPointDistance + " Distance to nearest jump point");
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
-        sensor.AddObservation(minJumpForce);
         sensor.AddObservation(maxJumpForce);
 
         // Add the x position of the platform the agent is currently on as an observation
@@ -119,13 +115,6 @@ public class AgentMovement : Agent
         // Add the x position of the nearest moving platform as an observation
         sensor.AddObservation(nearestPlatformXPosition);
         //Debug.Log(nearestPlatformXPosition + " X position of nearest moving platform");
-
-
-        // Add the Z rotation of the nearest moving platform as an observation
-        sensor.AddObservation(nearestPlatformZRotation);
-        sensor.AddObservation(pauseTime);
-
-
     }
 
     public override void OnActionReceived(ActionBuffers actions)

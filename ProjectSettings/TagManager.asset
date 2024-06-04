@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - MovingPlatform
   - Speler
+  - RotatingPlatform
   layers:
   - Default
   - TransparentFX
