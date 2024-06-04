@@ -17,7 +17,7 @@ public class AgentMovement: Agent
     private Vector3 startingPosition;
     private Vector3 beginPos;
     private Rigidbody rb;
-    public CapsuleCollider capsuleCollider;
+    public BoxCollider capsuleCollider;
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;

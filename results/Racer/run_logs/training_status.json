@@ -2,22 +2,58 @@
     "Racer": {
         "checkpoints": [
             {
-                "steps": 332944,
-                "file_path": "results\\Racer\\Racer\\Racer-332944.onnx",
-                "reward": 1.638709773219401,
-                "creation_time": 1715101765.9383054,
+                "steps": 12793,
+                "file_path": "results\\Racer\\Racer\\Racer-12793.onnx",
+                "reward": -1.6090909134257922,
+                "creation_time": 1717490617.608261,
                 "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-332944.pt"
+                    "results\\Racer\\Racer\\Racer-12793.pt"
+                ]
+            },
+            {
+                "steps": 46509,
+                "file_path": "results\\Racer\\Racer\\Racer-46509.onnx",
+                "reward": -1.7291139152985584,
+                "creation_time": 1717490900.248463,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-46509.pt"
+                ]
+            },
+            {
+                "steps": 53163,
+                "file_path": "results\\Racer\\Racer\\Racer-53163.onnx",
+                "reward": -1.750362288908682,
+                "creation_time": 1717491072.5034988,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-53163.pt"
+                ]
+            },
+            {
+                "steps": 61764,
+                "file_path": "results\\Racer\\Racer\\Racer-61764.onnx",
+                "reward": -1.7083333267105951,
+                "creation_time": 1717491626.1129727,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-61764.pt"
+                ]
+            },
+            {
+                "steps": 65260,
+                "file_path": "results\\Racer\\Racer\\Racer-65260.onnx",
+                "reward": -1.7148648475854529,
+                "creation_time": 1717491881.0059986,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-65260.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 332944,
+            "steps": 65260,
             "file_path": "results\\Racer\\Racer.onnx",
-            "reward": 1.638709773219401,
-            "creation_time": 1715101765.9383054,
+            "reward": -1.7148648475854529,
+            "creation_time": 1717491881.0059986,
             "auxillary_file_paths": [
-                "results\\Racer\\Racer\\Racer-332944.pt"
+                "results\\Racer\\Racer\\Racer-65260.pt"
             ]
         }
     },
