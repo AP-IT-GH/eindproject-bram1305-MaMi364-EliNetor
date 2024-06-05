@@ -17,7 +17,7 @@ public class AgentMovement : Agent
     private Vector3 startingPosition;
     private Vector3 beginPos;
     private Rigidbody rb;
-    public CapsuleCollider capsuleCollider;
+    //public CapsuleCollider capsuleCollider;
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
@@ -240,14 +240,14 @@ public class AgentMovement : Agent
         if (Physics.CheckSphere(transform.position + Vector3.down, 0.22f, platformLayer))
         {
             // changing the collider center Y position to adjust to the actual animations
-            Vector3 newCenter = new Vector3(capsuleCollider.center.x, -0.35f, capsuleCollider.center.z);
-            capsuleCollider.center = newCenter;
+            //Vector3 newCenter = new Vector3(capsuleCollider.center.x, -0.35f, capsuleCollider.center.z);
+            //capsuleCollider.center = newCenter;
             return true;
         }
         else
         {
-            Vector3 newCenter = new Vector3(capsuleCollider.center.x, 0.4f, capsuleCollider.center.z);
-            capsuleCollider.center = newCenter;
+            //Vector3 newCenter = new Vector3(capsuleCollider.center.x, 0.4f, capsuleCollider.center.z);
+            //capsuleCollider.center = newCenter;
             return false;
         }
     }
