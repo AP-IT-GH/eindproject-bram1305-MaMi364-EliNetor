@@ -101,39 +101,6 @@ public class CubeAgentRays : Agent
             AddReward(-1f);
             EndEpisode();
         }
-
-        if (rotateAction > 0f && !hasRotated && IsGrounded())
-        {
-            StartCoroutine(RotateCube());
-            hasRotated = true;
-        }
-        else if (rotateAction == 0f)
-        {
-            hasRotated = false;
-        }
-    }
-
-    private bool hasRotated = false;
-
-    private IEnumerator RotateCube()
-    {
-        anim.SetBool("turn", true);
-
-        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("turn"))
-        {
-            yield return null;
-        }
-
-        while (anim.GetCurrentAnimatorStateInfo(0).IsName("turn") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
-            yield return null;
-        }
-
-        Vector3 newRotation = transform.eulerAngles;
-        newRotation.y += 180f;
-        transform.eulerAngles = newRotation;
-        anim.SetBool("turn", false);
-
     }
 
 
