@@ -181,7 +181,8 @@ public class AgentMovement : Agent
                     previousCheckpoint = collision.gameObject.name;
                 }
 
-                startingPosition = transform.position;
+                Transform respawnPoint = collision.gameObject.transform.Find("RespawnPointAgent");
+                startingPosition = respawnPoint.position;
                 points = false;
             }
             else if (collision.gameObject.CompareTag("Einde"))
@@ -210,7 +211,8 @@ public class AgentMovement : Agent
         isChargingJump = true;
         currentJumpForce = minJumpForce;
         anim.SetBool("crouch", true);
-        AddReward(0.1f);
+        Debug.Log("jump points");
+        AddReward(0.001f);
     }
 
     private void ContinueChargingJump()
