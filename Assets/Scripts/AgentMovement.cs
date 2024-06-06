@@ -17,7 +17,8 @@ public class AgentMovement : Agent
     private Vector3 startingPosition;
     private Vector3 beginPos;
     private Rigidbody rb;
-    //public CapsuleCollider capsuleCollider;
+    public CapsuleCollider leftFoot;
+    public CapsuleCollider rightFoot;
     private bool isChargingJump = false; // Flag to track if jump is being charged
     private float currentJumpForce = 0f; // Current jump force
     private float forwardForce;
@@ -185,6 +186,10 @@ public class AgentMovement : Agent
             {
                 EndEpisode();
             }
+        }
+        if (!(rb.velocity.y < 0))
+        {
+            anim.SetBool("jump", false);
         }
     }
     private void OnCollisionExit(Collision collision)

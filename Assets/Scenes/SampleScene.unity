@@ -991,6 +991,8 @@ MonoBehaviour:
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
+  leftFoot: {fileID: 1394083550}
+  rightFoot: {fileID: 1668547328}
 --- !u!1001 &885311533908650385
 PrefabInstance:
   m_ObjectHideFlags: 0
