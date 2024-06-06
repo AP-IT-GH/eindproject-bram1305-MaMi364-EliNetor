@@ -197,11 +197,14 @@ public class AgentMovement : Agent
 
     private void StartChargingJump()
     {
-        isChargingJump = true;
-        currentJumpForce = minJumpForce;
-        anim.SetBool("crouch", true);
-        Debug.Log("jump points");
-        AddReward(0.001f);
+        if (IsGrounded())
+        {
+            isChargingJump = true;
+            currentJumpForce = minJumpForce;
+            anim.SetBool("crouch", true);
+            Debug.Log("jump points");
+            AddReward(0.001f);
+        }
     }
 
     private void ContinueChargingJump()

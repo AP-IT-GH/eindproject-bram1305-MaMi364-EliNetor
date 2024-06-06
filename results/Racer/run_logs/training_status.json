@@ -18,15 +18,33 @@
                 "auxillary_file_paths": [
                     "results\\Racer\\Racer\\Racer-500036.pt"
                 ]
+            },
+            {
+                "steps": 0,
+                "file_path": "results\\Racer\\Racer\\Racer-0.onnx",
+                "reward": null,
+                "creation_time": 1717663625.3763185,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-0.pt"
+                ]
+            },
+            {
+                "steps": 1441,
+                "file_path": "results\\Racer\\Racer\\Racer-1441.onnx",
+                "reward": -1.9973965307761883,
+                "creation_time": 1717663752.4581177,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-1441.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 500036,
+            "steps": 1441,
             "file_path": "results\\Racer\\Racer.onnx",
-            "reward": -0.728971920977129,
-            "creation_time": 1717522025.569559,
+            "reward": -1.9973965307761883,
+            "creation_time": 1717663752.4581177,
             "auxillary_file_paths": [
-                "results\\Racer\\Racer\\Racer-500036.pt"
+                "results\\Racer\\Racer\\Racer-1441.pt"
             ]
         }
     },
