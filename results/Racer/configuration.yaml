@@ -3,8 +3,8 @@ behaviors:
   Racer:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 1024
-      buffer_size: 8192
+      batch_size: 2048
+      buffer_size: 16384
       learning_rate: 0.0003
       beta: 0.0005
       epsilon: 0.2
@@ -37,9 +37,9 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 500000
-    max_steps: 500000
+    max_steps: 1000000
     time_horizon: 64
-    summary_freq: 2000
+    summary_freq: 5000
     threaded: false
     self_play: null
     behavioral_cloning: null
@@ -66,7 +66,7 @@ checkpoint_settings:
   run_id: Racer
   initialize_from: null
   load_model: false
-  resume: true
+  resume: false
   force: false
   train_model: false
   inference: false
