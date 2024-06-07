@@ -10,9 +10,9 @@ using UnityEngine.UIElements;
 public class AgentMovement : Agent
 {
     public Animator anim;  // Animation controller
-    public float minJumpForce = 5f; // Minimum jump force
-    public float maxJumpForce = 10f; // Maximum jump force
-    public float chargeRate = 2f; // Rate at which jump force charges
+    public float minJumpForce = 8f; // Minimum jump force
+    public float maxJumpForce = 16f; // Maximum jump force
+    public float chargeRate = 4f; // Rate at which jump force charges
     public LayerMask platformLayer;
     private Vector3 startingPosition;
     private Vector3 beginPos;
@@ -26,7 +26,7 @@ public class AgentMovement : Agent
     private float nearestPlatformXPosition;
     private string checkpointName;
     private string previousCheckpoint;
-    private const float stuckThreshold = 35f; 
+    private const float stuckThreshold = 50f; 
     private float stuckTimer = 0f;
 
     public override void Initialize()

@@ -2,15 +2,6 @@
     "Racer": {
         "checkpoints": [
             {
-                "steps": 499979,
-                "file_path": "results\\Racer\\Racer\\Racer-499979.onnx",
-                "reward": -0.8738372297091193,
-                "creation_time": 1717778464.4420257,
-                "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-499979.pt"
-                ]
-            },
-            {
                 "steps": 900520,
                 "file_path": "results\\Racer\\Racer\\Racer-900520.onnx",
                 "reward": -0.4500000242719321,
@@ -18,15 +9,51 @@
                 "auxillary_file_paths": [
                     "results\\Racer\\Racer\\Racer-900520.pt"
                 ]
+            },
+            {
+                "steps": 999997,
+                "file_path": "results\\Racer\\Racer\\Racer-999997.onnx",
+                "reward": -0.4750000238418579,
+                "creation_time": 1717786875.6646104,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-999997.pt"
+                ]
+            },
+            {
+                "steps": 1499972,
+                "file_path": "results\\Racer\\Racer\\Racer-1499972.onnx",
+                "reward": -0.3060606319758326,
+                "creation_time": 1717790765.1226132,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-1499972.pt"
+                ]
+            },
+            {
+                "steps": 1545847,
+                "file_path": "results\\Racer\\Racer\\Racer-1545847.onnx",
+                "reward": -0.2484483010424622,
+                "creation_time": 1717791131.1703854,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-1545847.pt"
+                ]
+            },
+            {
+                "steps": 1600610,
+                "file_path": "results\\Racer\\Racer\\Racer-1600610.onnx",
+                "reward": -0.10627121361509217,
+                "creation_time": 1717791793.9516592,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-1600610.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 900520,
+            "steps": 1600610,
             "file_path": "results\\Racer\\Racer.onnx",
-            "reward": -0.4500000242719321,
-            "creation_time": 1717781618.2293227,
+            "reward": -0.10627121361509217,
+            "creation_time": 1717791793.9516592,
             "auxillary_file_paths": [
-                "results\\Racer\\Racer\\Racer-900520.pt"
+                "results\\Racer\\Racer\\Racer-1600610.pt"
             ]
         }
     },
