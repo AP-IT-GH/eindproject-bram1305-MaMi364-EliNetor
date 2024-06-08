@@ -11,7 +11,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CubeAgentRays : Agent
 {
-    public Animator anim;  // Animation controller
     public float minJumpForce = 5f; // Minimum jump force
     public float maxJumpForce = 10f; // Maximum jump force
     public float chargeRate = 2f; // Rate at which jump force charges
@@ -44,7 +43,6 @@ public class CubeAgentRays : Agent
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         currentJumpForce = 0f;
-        anim.SetBool("jump", false);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -78,7 +76,7 @@ public class CubeAgentRays : Agent
 
         if (IsGrounded())
         {
-            anim.SetBool("jump", false);
+            
         }
         if (jumpAction > 0f)
         {
@@ -139,7 +137,7 @@ public class CubeAgentRays : Agent
     {
         isChargingJump = true;
         currentJumpForce = minJumpForce;
-        anim.SetBool("crouch", true);
+        //anim.SetBool("crouch", true);
     }
 
     private void ContinueChargingJump()
@@ -150,8 +148,6 @@ public class CubeAgentRays : Agent
 
     private void EndChargingJump()
     {
-        anim.SetBool("crouch", false);
-        anim.SetBool("jump", true);
         isChargingJump = false;
         Jump(dir);
     }
