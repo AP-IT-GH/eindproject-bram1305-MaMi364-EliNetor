@@ -26,8 +26,9 @@ public class AgentMovement : Agent
     private float nearestPlatformXPosition;
     private string checkpointName;
     private string previousCheckpoint;
-    private const float stuckThreshold = 50f; 
+    private const float stuckThreshold = 60f; 
     private float stuckTimer = 0f;
+    private float StandingStillTimer = 0f;
 
     public override void Initialize()
     {
@@ -44,6 +45,7 @@ public class AgentMovement : Agent
         currentJumpForce = 0f;
         anim.SetBool("jump", false);
         stuckTimer = 0f;
+        StandingStillTimer = 0f;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -55,11 +57,11 @@ public class AgentMovement : Agent
         allPlatforms.AddRange(movingPlatforms);
 
         // Find the nearest jump point
-        float nearestJumpPointDistance = Mathf.Infinity;
+        float nearestJumpPointDistance = 100000f;
         foreach (GameObject jumpPoint in jumpPoints)
         {
             float distance = Vector3.Distance(transform.position, jumpPoint.transform.position);
-            if (distance < nearestJumpPointDistance)
+            if (jumpPoint.transform.position.z > transform.position.z)
             {
                 if (distance > 3.5f)
                 {
@@ -194,7 +196,22 @@ public class AgentMovement : Agent
             }
         }  else
         {
-            stuckTimer = 0;
+            stuckTimer = 0f;
+        }
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            StandingStillTimer += Time.deltaTime;
+            if (StandingStillTimer >= stuckThreshold)
+            {
+                Debug.Log("Standing Still");
+                StandingStillTimer = 0f; // Reset timer 
+                AddReward(-1f);
+                EndEpisode();
+            }
+        }
+        else
+        {
+            StandingStillTimer = 0f;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -220,7 +237,7 @@ public class AgentMovement : Agent
     {
         // Increase jump force as long as the jump button is held
         currentJumpForce = Mathf.Min(currentJumpForce + Time.fixedDeltaTime * chargeRate, maxJumpForce);
-        if (currentJumpForce > maxJumpForce)
+        if (currentJumpForce >= maxJumpForce)
         {
             EndChargingJump();
         }
