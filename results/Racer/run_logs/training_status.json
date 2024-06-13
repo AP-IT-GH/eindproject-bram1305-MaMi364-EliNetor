@@ -2,42 +2,6 @@
     "Racer": {
         "checkpoints": [
             {
-                "steps": 2050856,
-                "file_path": "results\\Racer\\Racer\\Racer-2050856.onnx",
-                "reward": null,
-                "creation_time": 1717855662.0960832,
-                "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-2050856.pt"
-                ]
-            },
-            {
-                "steps": 2499970,
-                "file_path": "results\\Racer\\Racer\\Racer-2499970.onnx",
-                "reward": 0.19951216835619473,
-                "creation_time": 1717859835.2635539,
-                "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-2499970.pt"
-                ]
-            },
-            {
-                "steps": 2999983,
-                "file_path": "results\\Racer\\Racer\\Racer-2999983.onnx",
-                "reward": -0.03693879819570147,
-                "creation_time": 1717864152.5450542,
-                "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-2999983.pt"
-                ]
-            },
-            {
-                "steps": 3499999,
-                "file_path": "results\\Racer\\Racer\\Racer-3499999.onnx",
-                "reward": 0.19655170176049758,
-                "creation_time": 1717868467.596054,
-                "auxillary_file_paths": [
-                    "results\\Racer\\Racer\\Racer-3499999.pt"
-                ]
-            },
-            {
                 "steps": 3925212,
                 "file_path": "results\\Racer\\Racer\\Racer-3925212.onnx",
                 "reward": 0.8736841809004545,
@@ -45,15 +9,51 @@
                 "auxillary_file_paths": [
                     "results\\Racer\\Racer\\Racer-3925212.pt"
                 ]
+            },
+            {
+                "steps": 0,
+                "file_path": "results\\Racer\\Racer\\Racer-0.onnx",
+                "reward": null,
+                "creation_time": 1717931860.7924876,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-0.pt"
+                ]
+            },
+            {
+                "steps": 422327,
+                "file_path": "results\\Racer\\Racer\\Racer-422327.onnx",
+                "reward": -1.9661229412042784,
+                "creation_time": 1717933891.4087343,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-422327.pt"
+                ]
+            },
+            {
+                "steps": 499977,
+                "file_path": "results\\Racer\\Racer\\Racer-499977.onnx",
+                "reward": -1.9587921445843963,
+                "creation_time": 1717934248.4257565,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-499977.pt"
+                ]
+            },
+            {
+                "steps": 627169,
+                "file_path": "results\\Racer\\Racer\\Racer-627169.onnx",
+                "reward": -1.8981818267511148,
+                "creation_time": 1717934827.3210998,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-627169.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 3925212,
+            "steps": 627169,
             "file_path": "results\\Racer\\Racer.onnx",
-            "reward": 0.8736841809004545,
-            "creation_time": 1717872165.9488697,
+            "reward": -1.8981818267511148,
+            "creation_time": 1717934827.3210998,
             "auxillary_file_paths": [
-                "results\\Racer\\Racer\\Racer-3925212.pt"
+                "results\\Racer\\Racer\\Racer-627169.pt"
             ]
         }
     },

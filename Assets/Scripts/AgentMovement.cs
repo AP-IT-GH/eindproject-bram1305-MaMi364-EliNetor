@@ -281,6 +281,12 @@ public class AgentMovement : Agent
         }
     }
 
+    public void ResetPosition()
+    {
+        transform.position = startingPosition;
+        rb.velocity = Vector3.zero;
+    }
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var actions = actionsOut.ContinuousActions;
