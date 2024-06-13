@@ -28,7 +28,9 @@ public class AgentMovement : Agent
     private string previousCheckpoint;
     private const float stuckThreshold = 60f; 
     private float stuckTimer = 0f;
+    private const float StandingStillThreshold = 10f;
     private float StandingStillTimer = 0f;
+    private float chargingTime = 0f;
 
     public override void Initialize()
     {
@@ -46,6 +48,7 @@ public class AgentMovement : Agent
         anim.SetBool("jump", false);
         stuckTimer = 0f;
         StandingStillTimer = 0f;
+        chargingTime = 0f;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -99,6 +102,15 @@ public class AgentMovement : Agent
             }
         }
 
+        if(!isChargingJump && IsGrounded())
+        {
+            chargingTime += Time.deltaTime;
+        }
+        else
+        {
+            chargingTime = 0;
+        }
+
         // Add observations
         sensor.AddObservation(nearestJumpPointDistance);
         //Debug.Log("DISTANCE: " + nearestJumpPointDistance);
@@ -106,9 +118,11 @@ public class AgentMovement : Agent
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
         sensor.AddObservation(maxJumpForce);
+
+        sensor.AddObservation(chargingTime);
+
         sensor.AddObservation(platformUnderAgentXPosition);
         //Debug.Log(platformUnderAgentXPosition + " X position of platform under agent");
-
         sensor.AddObservation(nearestPlatformXPosition);
         //Debug.Log(nearestPlatformXPosition + " X position of nearest moving platform");
     }
@@ -201,12 +215,11 @@ public class AgentMovement : Agent
         if (collision.gameObject.CompareTag("Platform"))
         {
             StandingStillTimer += Time.deltaTime;
-            if (StandingStillTimer >= stuckThreshold)
+            if (StandingStillTimer >= StandingStillThreshold)
             {
                 Debug.Log("Standing Still");
                 StandingStillTimer = 0f; // Reset timer 
-                AddReward(-1f);
-                EndEpisode();
+                AddReward(-0.7f);
             }
         }
         else
