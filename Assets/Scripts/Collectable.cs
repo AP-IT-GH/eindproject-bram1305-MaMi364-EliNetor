@@ -17,10 +17,10 @@ public class Collectable : MonoBehaviour
     // This function is called when another object enters a trigger collider attached to this object
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Collectable"))
         {
             AddPoint();
-            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 

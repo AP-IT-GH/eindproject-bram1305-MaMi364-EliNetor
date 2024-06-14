@@ -11,6 +11,7 @@ TagManager:
   - MovingPlatform
   - Speler
   - RotatingPlatform
+  - Collectable
   layers:
   - Default
   - TransparentFX
