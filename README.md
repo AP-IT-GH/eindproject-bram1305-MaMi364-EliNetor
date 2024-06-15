@@ -102,7 +102,7 @@ De TensorBoard-grafieken tonen een duidelijk patroon van aanvankelijke groei, ge
 - Stoppen bij 6.8 miljoen stappen: Ondanks de instorting bij 6.080.000 stappen, hebben we de training voortgezet tot 6.8 miljoen stappen. Echter, we hebben uiteindelijk besloten om het model van 6 miljoen stappen te gebruiken vanwege de problemen op dat punt.
 
 ## Conclusie
-
+![Alt text](TensorBoard_Grafiek.jpg)
 In dit project hebben we een race platformer ontwikkeld waarbij ML-agents leren 'charged jumpen' in een VR-omgeving, getraind met behulp van Anaconda en gevisualiseerd met TensorBoard.
 
 De resultaten tonen een initiële snelle verbetering in de prestaties van de AI-agents, gevolgd door fluctuaties en uiteindelijk een onverwachte ineenstorting na een bepaalde trainingsperiode. Ondanks deze uitdagingen hebben we een werkbaar model kunnen trainen.
