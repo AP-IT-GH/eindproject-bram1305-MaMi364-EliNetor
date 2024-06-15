@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 1494502046952954474}
   - component: {fileID: 4844294610509987536}
   - component: {fileID: 5674968435456422081}
-  - component: {fileID: 1902522285947215762}
+  - component: {fileID: 7549908171639027472}
+  - component: {fileID: 3326165855538084343}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,24 +100,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 4
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 2
+      m_NumContinuousActions: 1
       BranchSizes: 
-    VectorActionSize: 02000000
+    VectorActionSize: 01000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: f4135760d4a776942a4a57753eaf2724, type: 3}
   m_InferenceDevice: 1
-  m_BehaviorType: 1
+  m_BehaviorType: 2
   m_BehaviorName: Racer
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
---- !u!114 &1902522285947215762
+--- !u!114 &7549908171639027472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,7 +126,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 727509457106805189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad7f500dd16b63499b2d42eb562ebfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 267e0508b2e1a1f43a23b393f9822d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
@@ -140,9 +141,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   capsuleCollider: {fileID: 1494502046952954474}
-  controller: {fileID: 0}
-  primaryReference: {fileID: 0}
-  secondaryReference: {fileID: 0}
+--- !u!114 &3326165855538084343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727509457106805189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 10
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &9120272194438140310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +202,30 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.87287116
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.48188058
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.037082937
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.06717146
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 57.803
+      objectReference: {fileID: 0}
+    - target: {fileID: 608321761475470972, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 8.801
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7b9e1d93baa94ca4b8dea21130cf602e, type: 3}
       propertyPath: m_Name
