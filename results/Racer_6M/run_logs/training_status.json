@@ -1,0 +1,65 @@
+{
+    "Racer": {
+        "checkpoints": [
+            {
+                "steps": 3499946,
+                "file_path": "results\\Racer\\Racer\\Racer-3499946.onnx",
+                "reward": 2.4061903612954274,
+                "creation_time": 1718372146.7900393,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-3499946.pt"
+                ]
+            },
+            {
+                "steps": 3999995,
+                "file_path": "results\\Racer\\Racer\\Racer-3999995.onnx",
+                "reward": 1.111333259989818,
+                "creation_time": 1718375844.7855372,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-3999995.pt"
+                ]
+            },
+            {
+                "steps": 4040971,
+                "file_path": "results\\Racer\\Racer\\Racer-4040971.onnx",
+                "reward": 1.451304272465084,
+                "creation_time": 1718376178.0274656,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-4040971.pt"
+                ]
+            },
+            {
+                "steps": 4499998,
+                "file_path": "results\\Racer\\Racer\\Racer-4499998.onnx",
+                "reward": 1.5105951474536032,
+                "creation_time": 1718379673.48175,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-4499998.pt"
+                ]
+            },
+            {
+                "steps": 4845262,
+                "file_path": "results\\Racer\\Racer\\Racer-4845262.onnx",
+                "reward": 0.4355813378049422,
+                "creation_time": 1718382386.259153,
+                "auxillary_file_paths": [
+                    "results\\Racer\\Racer\\Racer-4845262.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4845262,
+            "file_path": "results\\Racer\\Racer.onnx",
+            "reward": 0.4355813378049422,
+            "creation_time": 1718382386.259153,
+            "auxillary_file_paths": [
+                "results\\Racer\\Racer\\Racer-4845262.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
