@@ -178,10 +178,18 @@ public class AgentMovement : Agent
                     AddReward(1f);
                     previousCheckpoint = collision.gameObject.name;
                 }
+                try
+                {
+                    Transform respawnPoint = collision.gameObject.transform.Find("RespawnPointAgent");
+                    Vector3 currentPosition = transform.position;
+                    startingPosition = new Vector3(currentPosition.x, respawnPoint.position.y, respawnPoint.position.z);
+                    points = false;
+                }
+                catch (NullReferenceException ex)
+                {
+                    Debug.Log("Not Set ");
+                }
 
-                Transform respawnPoint = collision.gameObject.transform.Find("RespawnPointAgent");
-                startingPosition = respawnPoint.position;
-                points = false;
             }
             else if (collision.gameObject.CompareTag("Speler"))
             {

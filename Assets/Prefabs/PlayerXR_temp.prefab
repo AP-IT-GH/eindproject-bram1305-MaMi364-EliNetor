@@ -134,7 +134,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  anim: {fileID: 4613591924190062308}
   minJumpForce: 8
   maxJumpForce: 16
   chargeRate: 4
@@ -142,6 +141,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   capsuleCollider: {fileID: 5795907416339656382}
+  dir: {fileID: 0}
   controller: {fileID: 5579979647173704980}
   primaryReference: {fileID: -7518156624356765503, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   secondaryReference: {fileID: -6354683301850456425, guid: c348712bda248c246b8c49b3db54643f, type: 3}

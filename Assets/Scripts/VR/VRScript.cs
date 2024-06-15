@@ -62,7 +62,6 @@ public class CubeAgentRays : Agent
 
         // Add the distance to the nearest jump point as an observation
         sensor.AddObservation(nearestDistance);
-        Debug.Log(nearestDistance + " Distance");
         sensor.AddObservation(currentJumpForce);
         sensor.AddObservation(forwardForce);
         sensor.AddObservation(maxJumpForce);
@@ -106,13 +105,11 @@ public class CubeAgentRays : Agent
     {
         if (IsGrounded() && collision.gameObject.CompareTag("Platform") && points)
         {
-            Debug.Log("GOT POINTS");
             AddReward(1f);
             points = false;
         }
         else if (IsGrounded() && collision.gameObject.CompareTag("Checkpoint") && points)
         {
-            Debug.Log("GOT POINTS");
             AddReward(1f);
             startingPosition = transform.position;
             points = false;

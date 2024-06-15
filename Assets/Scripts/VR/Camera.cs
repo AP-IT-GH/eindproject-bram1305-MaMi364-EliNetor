@@ -14,10 +14,6 @@ public class Camera : MonoBehaviour
             // Calculate the initial offset between camera and character
             offset = transform.position - target.position;
         }
-        else
-        {
-            Debug.LogWarning("Target object is not assigned!");
-        }
     }
 
     void LateUpdate()
