@@ -112,3 +112,7 @@ De resultaten laten zien dat hoewel de ML-agents in staat zijn om effectief te l
 Voor toekomstige verbeteringen:
 1. Meer verfijnde beloningsstructuren: Dit kan helpen om de training consistenter te maken en de schommelingen te verminderen.
 2. Verschillende trainingsstrategieën: Het verkennen van technieken zoals curriculum learning, waarbij de moeilijkheidsgraad geleidelijk toeneemt, kan de leerervaring van de agents verbeteren.
+
+## Bronvermelding
+Unity-Technologies. (z.d.). ml-agents/docs/Learning-Environment-Create-New.md at release_19_docs · Unity-Technologies/ml-agents. GitHub. https://github.com/Unity-Technologies/ml-agents/blob/release_19_docs/docs/Learning-Environment-Create-New.md
+
