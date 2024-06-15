@@ -119,10 +119,10 @@ public class CubeAgentRays : Agent
         }
         else if (IsGrounded() && collision.gameObject.CompareTag("Einde"))
         {
-            Debug.Log("FINISHED!");
-            AddReward(5f);
-            startingPosition = beginPos;
-            EndEpisode();
+            //Debug.Log("FINISHED!");
+            //AddReward(5f);
+            //startingPosition = beginPos;
+            //EndEpisode();
         }
     }
     private void OnCollisionExit(Collision collision)

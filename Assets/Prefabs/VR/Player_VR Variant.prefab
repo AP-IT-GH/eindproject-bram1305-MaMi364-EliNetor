@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8983887332728872715, guid: e51fdfe8e27617e48b3604452212e939, type: 3}
+      propertyPath: m_MaxRaycastDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159053482276193152, guid: e51fdfe8e27617e48b3604452212e939, type: 3}
+      propertyPath: m_MaxRaycastDistance
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3067442086133454621, guid: e51fdfe8e27617e48b3604452212e939, type: 3}
     m_RemovedGameObjects: []
