@@ -11,6 +11,7 @@ public class EndGame : MonoBehaviour
     public GameObject player;
     public TextMeshProUGUI endText;
     public GameObject EndingScreen;
+    public GameObject EndSound;
     private Rigidbody rbPlayer;
     private Rigidbody[] rbAgent;
     private bool end = false;
@@ -72,5 +73,6 @@ public class EndGame : MonoBehaviour
         EndingScreen.SetActive(true);
         Vector3 playerPosition = player.transform.position;
         EndingScreen.transform.position = new Vector3(playerPosition.x, playerPosition.y, playerPosition.z + 5f);
+        EndSound.SetActive(true);
     }
 }
