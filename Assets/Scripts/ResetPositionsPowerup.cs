@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ResetPositionsPowerup : MonoBehaviour
 {
-    public AgentMovement agentScript;
+    public AgentMovement[] agentScript;
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (agentScript != null)
+            foreach (AgentMovement agent in agentScript)
             {
-                agentScript.ResetPosition();
+                if (agent != null)
+                {
+                    agent.ResetPosition();
+                }
             }
+            
             
             Destroy(gameObject);
         }
